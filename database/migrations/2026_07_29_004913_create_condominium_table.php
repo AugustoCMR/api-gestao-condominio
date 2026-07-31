@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('cnpj', 14)->nullable();
             $table->string('phone', 20)->nullable();
             $table->string('email', 255)->nullable();
+            $table->string('neighborhood', 100)->nullable();
+            $table->string('complement', 50)->nullable();
             $table->timestamps();
         });
     }
