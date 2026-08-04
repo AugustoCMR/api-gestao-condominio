@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCondominiumRequest;
+use App\Http\Requests\Condominium\StoreCondominiumRequest;
 use App\Models\Condominium;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
