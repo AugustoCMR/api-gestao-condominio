@@ -16,4 +16,9 @@ class CondominiumRepository
     {
         return Condominium::paginate($perPage);
     }
+
+    public function delete(string $uuid): void
+    {
+        Condominium::where('uuid', $uuid)->delete();
+    }
 }

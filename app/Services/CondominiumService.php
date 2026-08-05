@@ -8,7 +8,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CondominiumService
 {
-    public function __construct(private CondominiumRepository $repository) {}
+    public function __construct(private CondominiumRepository $repository)
+    {
+    }
 
     public function create(array $data): Condominium
     {
@@ -18,5 +20,10 @@ class CondominiumService
     public function findAll(): LengthAwarePaginator
     {
         return $this->repository->findAll();
+    }
+
+    public function delete(string $uuid): void
+    {
+        $this->repository->delete($uuid);
     }
 }
