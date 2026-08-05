@@ -1,9 +1,15 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CondominiumController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+Route::prefix('auth')->name('auth.')->group(function ()
+{
+    Route::post('/login', [AuthController::class, 'login']);
+});
 
 Route::prefix('user')->name('user.')->group(function ()
 {
