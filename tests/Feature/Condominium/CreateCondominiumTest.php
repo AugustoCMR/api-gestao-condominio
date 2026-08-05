@@ -15,7 +15,31 @@ class CreateCondominiumTest extends TestCase
     {
         Sanctum::actingAs(User::factory()->create(), ['*']);
 
-        $response = $this->postJson('/api/condominium', [
+        $response = $this->postJson('/api/condominium', $this->validPayload());
+
+        $response->assertCreated();
+
+        $this->assertDatabaseHas('condominiums', [
+            'cnpj' => '12345678911111',
+            'email' => 'contato@condominioteste.com.br',
+        ]);
+    }
+
+    public function test_guest_cannot_create_condominium(): void
+    {
+        $response = $this->postJson('/api/condominium', $this->validPayload());
+
+        $response->assertUnauthorized();
+
+        $this->assertDatabaseCount('condominiums', 0);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function validPayload(): array
+    {
+        return [
             'name' => 'Condomínio Teste',
             'address' => 'Rua Teste, 123',
             'city' => 'Cidade Teste',
@@ -26,8 +50,6 @@ class CreateCondominiumTest extends TestCase
             'email' => 'contato@condominioteste.com.br',
             'neighborhood' => 'Teste',
             'complement' => 'Apto 101',
-        ]);
-
-        $response->assertCreated();
+        ];
     }
 }
