@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Condominium;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CondominiumRepository
 {
@@ -11,8 +12,8 @@ class CondominiumRepository
         return Condominium::create($data);
     }
 
-    public function findAll(): array
+    public function findAll(int $perPage = 20): LengthAwarePaginator
     {
-        return Condominium::get()->toArray();
+        return Condominium::paginate($perPage);
     }
 }

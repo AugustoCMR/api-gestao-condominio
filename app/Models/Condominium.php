@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 #[Fillable([
@@ -19,13 +20,13 @@ use Illuminate\Database\Eloquent\Model;
     'city',
     'state',
     'zip_code',
-    'email'
+    'email',
 ])]
 #[Hidden(['id'])]
 #[Table('condominiums')]
 class Condominium extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
 
     public function uniqueIds(): array
     {
