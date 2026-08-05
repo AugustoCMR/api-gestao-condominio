@@ -18,6 +18,11 @@ class CreateUserTest extends TestCase
             'password' => 'password'
         ]);
 
-        $response->assertCreated();
+        $response->assertCreated()
+        ->assertJsonMissingPath('password');
+
+        $this->assertDatabaseHas('users', [
+            'email' => 'john.doe@example.com',
+        ]);
     }
 }

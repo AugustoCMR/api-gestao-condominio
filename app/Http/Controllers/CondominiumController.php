@@ -4,28 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Condominium\StoreCondominiumRequest;
 use App\Models\Condominium;
+use App\Services\CondominiumService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class CondominiumController extends Controller
 {
+    public function __construct(private CondominiumService $service)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return response()->json($this->service->findAll());
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreCondominiumRequest $request)
-    {   
+    {
         $condominium = $request->validated();
 
-        $condominium = Condominium::create($condominium);  
-        
+        $condominium = Condominium::create($condominium);
+
         return response()->json(
             $condominium,
             201
