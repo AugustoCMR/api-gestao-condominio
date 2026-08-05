@@ -24,4 +24,15 @@ class DeleteCondominiumTest extends TestCase
 
         $this->assertDatabaseMissing('condominiums', ['uuid' => $condominium->uuid]);
     }
+
+    public function test_guest_cannot_delete_condominium(): void
+    {
+        $condominium = Condominium::factory()->create();
+
+        $response = $this->deleteJson("/api/condominium/{$condominium->uuid}");
+
+        $response->assertUnauthorized();
+
+        $this->assertDatabaseCount('condominiums', 1);
+    }
 }
