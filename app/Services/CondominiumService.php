@@ -35,8 +35,21 @@ class CondominiumService
         return $condominium;
     }
 
-    public function delete(string $uuid): void
+    public function update(string $uuid, array $data): Condominium
     {
-        $this->repository->delete($uuid);
+        $condominium = $this->repository->findById($uuid);
+
+        $this->repository->update($condominium, $data);
+
+        return $condominium->fresh();
+    }
+
+    public function delete(string $uuid): bool
+    {
+        $condominium = $this->repository->findById($uuid);
+
+        $this->repository->delete($condominium);
+
+        return true;
     }
 }

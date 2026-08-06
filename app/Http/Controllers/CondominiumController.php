@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Condominium\StoreCondominiumRequest;
+use App\Http\Requests\Condominium\UpdateCondominiumRequest;
 use App\Models\Condominium;
 use App\Services\CondominiumService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CondominiumController extends Controller
 {
@@ -44,16 +46,18 @@ class CondominiumController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCondominiumRequest $request, string $uuid): JsonResponse
     {
-        //
+        return response()->json($this->service->update($uuid, $request->validated()));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $uuid): JsonResponse
+    public function destroy(string $uuid): Response
     {
-        return response()->json($this->service->delete($uuid), 204);
+        $this->service->delete($uuid);
+
+        return response()->noContent();
     }
 }

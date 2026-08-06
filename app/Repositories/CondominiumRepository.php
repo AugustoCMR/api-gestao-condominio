@@ -22,8 +22,13 @@ class CondominiumRepository
         return Condominium::where('uuid', $uuid)->first();
     }
 
-    public function delete(string $uuid): void
+    public function delete(Condominium $condominium): bool
     {
-        Condominium::where('uuid', $uuid)->delete();
+        return $condominium->delete();
+    }
+
+    public function update(Condominium $condominium, array $data): bool
+    {
+        return $condominium->update($data);
     }
 }

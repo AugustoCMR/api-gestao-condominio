@@ -22,7 +22,7 @@ Route::prefix('condominium')->name('condominium')->group(function ()
         Route::get('/', [CondominiumController::class, 'index']);
         Route::post('/', [CondominiumController::class, 'store']);
         Route::get('/{id}', [CondominiumController::class, 'show']);
-        Route::put('/{id}', [CondominiumController::class, 'update']);
+        Route::patch('/{id}', [CondominiumController::class, 'update']);
         Route::delete('/{id}', [CondominiumController::class, 'destroy']);
     });
 });
