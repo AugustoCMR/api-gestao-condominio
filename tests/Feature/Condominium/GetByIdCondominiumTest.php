@@ -24,6 +24,6 @@ class GetByIdCondominiumTest extends TestCase
         $response = $this->getJson(route('condominium.show', $condominium->uuid, absolute: false));
 
         $response->assertOk();
-        $response->assertJsonPath('uuid', $condominium->uuid);
+        $response->assertJsonPath('data.uuid', $condominium->uuid);
     }
 }

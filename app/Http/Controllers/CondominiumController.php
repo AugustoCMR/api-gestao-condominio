@@ -4,24 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Condominium\StoreCondominiumRequest;
 use App\Http\Requests\Condominium\UpdateCondominiumRequest;
-use App\Models\Condominium;
+use App\Http\Resources\CondominiumResource;
 use App\Services\CondominiumService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class CondominiumController extends Controller
 {
-    public function __construct(private CondominiumService $service)
-    {
-    }
+    public function __construct(private CondominiumService $service) {}
 
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(): AnonymousResourceCollection
     {
-        return response()->json($this->service->findAll());
+        return CondominiumResource::collection($this->service->findAll());
     }
 
     /**
@@ -29,26 +27,25 @@ class CondominiumController extends Controller
      */
     public function store(StoreCondominiumRequest $request): JsonResponse
     {
-        return response()->json(
-            $this->service->create($request->validated()),
-            201
-        );
+        return CondominiumResource::make($this->service->create($request->validated()))
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $uuid): JsonResponse
+    public function show(string $uuid): CondominiumResource
     {
-        return response()->json($this->service->findById($uuid));
+        return CondominiumResource::make($this->service->findById($uuid));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCondominiumRequest $request, string $uuid): JsonResponse
+    public function update(UpdateCondominiumRequest $request, string $uuid): CondominiumResource
     {
-        return response()->json($this->service->update($uuid, $request->validated()));
+        return CondominiumResource::make($this->service->update($uuid, $request->validated()));
     }
 
     /**

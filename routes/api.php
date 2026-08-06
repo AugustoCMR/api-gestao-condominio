@@ -9,16 +9,10 @@ Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
 
-Route::prefix('user')->name('user.')->group(function () {
+Route::prefix('users')->name('user.')->group(function () {
     Route::post('/register', [UserController::class, 'store'])->name('register');
 });
 
-Route::prefix('condominium')->name('condominium.')->group(function () {
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::get('/', [CondominiumController::class, 'index'])->name('index');
-        Route::post('/', [CondominiumController::class, 'store'])->name('store');
-        Route::get('/{id}', [CondominiumController::class, 'show'])->name('show');
-        Route::patch('/{id}', [CondominiumController::class, 'update'])->name('update');
-        Route::delete('/{id}', [CondominiumController::class, 'destroy'])->name('destroy');
-    });
-});
+Route::apiResource('condominiums', CondominiumController::class)
+    ->names('condominium')
+    ->middleware('auth:sanctum');

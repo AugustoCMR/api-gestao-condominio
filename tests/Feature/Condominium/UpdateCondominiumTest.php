@@ -23,7 +23,7 @@ class UpdateCondominiumTest extends TestCase
             $this->payload()
         );
 
-        $response->assertOk()->assertJsonPaths(['uuid' => $condominium->uuid, 'name' => 'testeUpdate']);
+        $response->assertOk()->assertJsonPaths(['data.uuid' => $condominium->uuid, 'data.name' => 'testeUpdate']);
 
         $this->assertDatabaseHas('condominiums', [
             'name' => 'testeUpdate',
