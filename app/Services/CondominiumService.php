@@ -34,4 +34,9 @@ class CondominiumService
 
         return $condominium;
     }
+
+    public function delete(string $uuid): void
+    {
+        $this->repository->delete($uuid);
+    }
 }

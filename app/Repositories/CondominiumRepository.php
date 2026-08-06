@@ -21,4 +21,9 @@ class CondominiumRepository
     {
         return Condominium::where('uuid', $uuid)->first();
     }
+
+    public function delete(string $uuid): void
+    {
+        Condominium::where('uuid', $uuid)->delete();
+    }
 }

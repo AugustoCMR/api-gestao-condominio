@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 
 class CondominiumController extends Controller
 {
-    public function __construct(private CondominiumService $service) {}
+    public function __construct(private CondominiumService $service)
+    {
+    }
 
     /**
      * Display a listing of the resource.
@@ -50,8 +52,8 @@ class CondominiumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $uuid): JsonResponse
     {
-        //
+        return response()->json($this->service->delete($uuid), 204);
     }
 }
