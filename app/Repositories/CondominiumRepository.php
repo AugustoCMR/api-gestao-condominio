@@ -16,4 +16,9 @@ class CondominiumRepository
     {
         return Condominium::paginate($perPage);
     }
+
+    public function findById(string $uuid): ?Condominium
+    {
+        return Condominium::where('uuid', $uuid)->first();
+    }
 }
