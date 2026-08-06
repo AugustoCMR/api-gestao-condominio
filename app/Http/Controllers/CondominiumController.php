@@ -36,9 +36,9 @@ class CondominiumController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Condominium $condominium)
+    public function show(string $uuid): JsonResponse
     {
-        return response()->json($condominium);
+        return response()->json($this->service->findById($uuid));
     }
 
     /**
