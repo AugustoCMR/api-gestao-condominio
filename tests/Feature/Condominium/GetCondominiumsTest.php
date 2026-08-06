@@ -18,7 +18,7 @@ class GetCondominiumsTest extends TestCase
 
         Condominium::factory()->count(25)->create();
 
-        $response = $this->getJson('/api/condominium');
+        $response = $this->getJson(route('condominium.index', absolute: false));
 
         $response->assertOk();
 
@@ -68,7 +68,7 @@ class GetCondominiumsTest extends TestCase
 
         Condominium::factory()->count(25)->create();
 
-        $response = $this->getJson('/api/condominium?page=2');
+        $response = $this->getJson(route('condominium.index', ['page' => 2], absolute: false));
 
         $response->assertOk();
 
@@ -81,7 +81,7 @@ class GetCondominiumsTest extends TestCase
     {
         Sanctum::actingAs(User::factory()->create(), ['*']);
 
-        $response = $this->getJson('/api/condominium');
+        $response = $this->getJson(route('condominium.index', absolute: false));
 
         $response->assertOk();
 
@@ -94,7 +94,7 @@ class GetCondominiumsTest extends TestCase
 
     public function test_guest_cannot_get_condominiums(): void
     {
-        $response = $this->getJson('/api/condominium');
+        $response = $this->getJson(route('condominium.index', absolute: false));
 
         $response->assertUnauthorized();
     }

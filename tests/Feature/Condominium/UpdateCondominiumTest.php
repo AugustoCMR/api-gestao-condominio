@@ -19,7 +19,7 @@ class UpdateCondominiumTest extends TestCase
         $condominium = Condominium::factory()->create();
 
         $response = $this->patchJson(
-            "api/condominium/{$condominium->uuid}",
+            route('condominium.update', $condominium->uuid, absolute: false),
             $this->payload()
         );
 
@@ -27,14 +27,14 @@ class UpdateCondominiumTest extends TestCase
 
         $this->assertDatabaseHas('condominiums', [
             'name' => 'testeUpdate',
-            'uuid' => $condominium->uuid
+            'uuid' => $condominium->uuid,
         ]);
     }
 
     private function payload(): array
     {
         return [
-            'name' => 'testeUpdate'
+            'name' => 'testeUpdate',
         ];
     }
 }

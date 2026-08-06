@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\User;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CreateUserTest extends TestCase
@@ -12,14 +11,14 @@ class CreateUserTest extends TestCase
      */
     public function test_create_user(): void
     {
-        $response = $this->postJson('/api/user/register', [
+        $response = $this->postJson(route('user.register', absolute: false), [
             'name' => 'John Doe',
             'email' => 'john.doe@example.com',
-            'password' => 'password'
+            'password' => 'password',
         ]);
 
         $response->assertCreated()
-        ->assertJsonMissingPath('password');
+            ->assertJsonMissingPath('password');
 
         $this->assertDatabaseHas('users', [
             'email' => 'john.doe@example.com',

@@ -18,7 +18,7 @@ class DeleteCondominiumTest extends TestCase
 
         $condominium = Condominium::factory()->create();
 
-        $response = $this->deleteJson("/api/condominium/{$condominium->uuid}");
+        $response = $this->deleteJson(route('condominium.destroy', $condominium->uuid, absolute: false));
 
         $response->assertNoContent();
 
@@ -29,7 +29,7 @@ class DeleteCondominiumTest extends TestCase
     {
         $condominium = Condominium::factory()->create();
 
-        $response = $this->deleteJson("/api/condominium/{$condominium->uuid}");
+        $response = $this->deleteJson(route('condominium.destroy', $condominium->uuid, absolute: false));
 
         $response->assertUnauthorized();
 

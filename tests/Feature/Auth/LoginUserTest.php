@@ -22,7 +22,7 @@ class LoginUserTest extends TestCase
             'password' => Hash::make('0000'),
         ]);
 
-        $response = $this->postJson('/api/auth/login', [
+        $response = $this->postJson(route('auth.login', absolute: false), [
             'email' => 'john.doe@example.com',
             'password' => '0000',
         ]);

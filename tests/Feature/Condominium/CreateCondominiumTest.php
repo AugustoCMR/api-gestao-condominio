@@ -15,7 +15,7 @@ class CreateCondominiumTest extends TestCase
     {
         Sanctum::actingAs(User::factory()->create(), ['*']);
 
-        $response = $this->postJson('/api/condominium', $this->validPayload());
+        $response = $this->postJson(route('condominium.store', absolute: false), $this->validPayload());
 
         $response->assertCreated();
 
@@ -27,7 +27,7 @@ class CreateCondominiumTest extends TestCase
 
     public function test_guest_cannot_create_condominium(): void
     {
-        $response = $this->postJson('/api/condominium', $this->validPayload());
+        $response = $this->postJson(route('condominium.store', absolute: false), $this->validPayload());
 
         $response->assertUnauthorized();
 

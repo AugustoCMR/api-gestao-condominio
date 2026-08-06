@@ -11,6 +11,7 @@ use Tests\TestCase;
 class GetByIdCondominiumTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      */
@@ -20,7 +21,7 @@ class GetByIdCondominiumTest extends TestCase
 
         $condominium = Condominium::factory()->create();
 
-        $response = $this->getJson("api/condominium/{$condominium->uuid}");
+        $response = $this->getJson(route('condominium.show', $condominium->uuid, absolute: false));
 
         $response->assertOk();
         $response->assertJsonPath('uuid', $condominium->uuid);
